@@ -1,0 +1,35 @@
+<div class="container">
+  <div rtl>
+    <h1 class="main-heading">{{ "stms.favorites.title" | translate }}</h1>
+  </div>
+
+  <div class="table-section">
+    <div rtl>
+      <h3>{{ "stms.favorites.order.table.title" | translate }}</h3>
+
+      <ng-container *ngIf="favoriteOrderTableIsEmpty$ | async">
+        {{ "stms.favorites.order.no.table" | translate }}
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="!(favoriteOrderTableIsEmpty$ | async)">
+      <st-order-table [orders]="favoriteOrdersView$ | async"></st-order-table>
+    </ng-container>
+  </div>
+
+  <div class="table-section">
+    <div rtl>
+      <h3>{{ "stms.favorites.patient.table.title" | translate }}</h3>
+
+      <ng-container *ngIf="favoritePatientsTableIsEmpty$ | async">
+        {{ "stms.favorites.patient.no.table" | translate }}
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="!(favoritePatientsTableIsEmpty$ | async)">
+      <st-patient-table
+        [patients]="favoritePatientsView$ | async"
+      ></st-patient-table>
+    </ng-container>
+  </div>
+</div>

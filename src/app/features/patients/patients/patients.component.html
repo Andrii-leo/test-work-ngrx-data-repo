@@ -1,0 +1,30 @@
+<div class="container">
+  <div rtl>
+    <h1 class="main-heading">{{ "stms.patients.title" | translate }}</h1>
+    <div class="actions">
+      <a
+        mat-raised-button
+        class="actions-main"
+        color="primary"
+        (click)="getPatients()"
+      >
+        {{ "stms.patients.get-patients" | translate }}
+      </a>
+      <!--
+        Endpoint to fetch data: https://api.mocki.io/v2/51597ef3
+       -->
+    </div>
+  </div>
+
+  <ng-container *ngIf="loading$ | async">
+    {{ "stms.loading" | translate }}
+  </ng-container>
+
+  <ng-container
+    *ngIf="!(loading$ | async) && (patientsTableView$ | async)?.length"
+  >
+    <st-patient-table
+      [patients]="patientsTableView$ | async"
+    ></st-patient-table>
+  </ng-container>
+</div>

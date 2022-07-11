@@ -1,0 +1,28 @@
+<div class="container">
+  <div rtl>
+    <h1 class="main-heading">{{ "stms.orders.title" | translate }}</h1>
+    <div class="actions">
+      <a
+        mat-raised-button
+        class="actions-main"
+        color="primary"
+        (click)="getOrders()"
+      >
+        {{ "stms.orders.get-orders" | translate }}
+      </a>
+      <!--
+        Endpoint to fetch data: https://api.mocki.io/v2/79fb05cb
+       -->
+    </div>
+  </div>
+
+  <ng-container *ngIf="loading$ | async">
+    {{ "stms.loading" | translate }}
+  </ng-container>
+
+  <ng-container
+    *ngIf="!(loading$ | async) && (ordersTableView$ | async)?.length"
+  >
+    <st-order-table [orders]="ordersTableView$ | async"></st-order-table>
+  </ng-container>
+</div>
